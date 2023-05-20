@@ -21,8 +21,6 @@
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
     "mongoose": "^6.9.0",
-    "nodemon": "^2.0.20",
-    "react-responsive-modal": "^6.4.1",
-    "react-spinners": "^0.13.8"
+    "nodemon": "^2.0.20"
   }
 }
