@@ -256,7 +256,7 @@ router.post('/delete/comment/:postId/:commentId', UserMiddleware, async (req, re
     if (currentUserId == req.userId) {
       await PostModel.findByIdAndUpdate(postId, { $pull: { comments: commentId } }, { new: true })
       await CommentModel.findByIdAndDelete({ _id: commentId })
-      res.status(200).json({ msg: 'Comment Deleted' })
+      return res.status(200).json({ msg: 'Comment Deleted' })
     }
     res.status(400).json({ msg: "Invalid User" })
   } catch (error) {
