@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
 mongoose.set('strictQuery', false);
 
-const connectDB = ()=> {
-     mongoose.connect('mongodb+srv://Bilal:Bilal@contactmanager.q79x0.mongodb.net/hellogram?retryWrites=true&w=majority' , ()=> {
-    console.log('mongodb connected');
-})}
+const connectDB = () => {
+    mongoose.connect(process.env.MONGO_DB_KEY, () => {
+        console.log('mongodb connected');
+    })
+}
 
 connectDB()

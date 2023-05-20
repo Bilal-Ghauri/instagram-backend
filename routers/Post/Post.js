@@ -249,12 +249,16 @@ router.post('/create/comment', UserMiddleware, async (req, res) => {
   }
 })
 
-router.post('/delete/comment/:postId/:commentId', async (req, res) => {
+router.post('/delete/comment/:postId/:commentId', UserMiddleware, async (req, res) => {
   try {
     const { commentId, postId } = req.params
-    await PostModel.findByIdAndUpdate(postId, { $pull: { comments: commentId } }, { new: true })
-    await CommentModel.findByIdAndDelete({ _id: commentId })
-    res.status(200).json({ msg: 'Comment Deleted' })
+    const { currentUserId } = req.body
+    if (currentUserId == req.userId) {
+      await PostModel.findByIdAndUpdate(postId, { $pull: { comments: commentId } }, { new: true })
+      await CommentModel.findByIdAndDelete({ _id: commentId })
+      res.status(200).json({ msg: 'Comment Deleted' })
+    }
+    res.status(400).json({ msg: "Invalid User" })
   } catch (error) {
     return res.status(500).json(error.message)
   }
