@@ -1,4 +1,3 @@
-require('./db/db')
 require('dotenv').config()
 const express = require("express")
 const app = express()
@@ -7,8 +6,10 @@ const cors = require('cors')
 const cloudinary = require('cloudinary').v2
 const fileupload = require('express-fileupload')
 const postRoute = require('./routers/Post/Post')
+const connectDB = require('./db/db')
+const port = process.env.PORT || 5050
 
-let PORT = process.env.PORT || 5000
+
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -29,7 +30,20 @@ app.get('/', async (req, res) => {
     res.send('hello')
 })
 
+// app.listen(5000, () => {
+//     console.log('server Running');
+// })
 
-app.listen(PORT, () => {
-    console.log('App is running on port 5000');
+const startServer = async () => {
+    try {
+        await connectDB()
+
+    } catch (err) {
+        console.error(err.message)
+        process.exit(1)
+    }
+}
+startServer()
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`)
 })
