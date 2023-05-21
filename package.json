@@ -7,7 +7,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "dev": "nodemon server"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
