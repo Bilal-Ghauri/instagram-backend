@@ -30,20 +30,15 @@ app.get('/', async (req, res) => {
     res.send('hello')
 })
 
-// app.listen(5000, () => {
-//     console.log('server Running');
-// })
-
 const startServer = async () => {
     try {
         await connectDB()
-
+        app.listen(port, () => {
+            console.log(`Server running on port ${port}`)
+        })
     } catch (err) {
         console.error(err.message)
         process.exit(1)
     }
 }
 startServer()
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
-})
