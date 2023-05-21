@@ -7,8 +7,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "dev": "nodemon server",
-    "start": "concurrently \"yarn dev\" \" cd client && yarn dev\""
+    "dev": "nodemon server"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
