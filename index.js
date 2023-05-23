@@ -19,7 +19,7 @@ cloudinary.config({
 
 app.use(fileupload({ useTempFiles: true }))
 const corsOptions = {
-    origin: '*'
+    origin: 'https://instagram-frontend-omega.vercel.app'
 };
 app.use(cors(corsOptions));
 app.use(express.json())
