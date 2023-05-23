@@ -18,8 +18,10 @@ cloudinary.config({
 })
 
 app.use(fileupload({ useTempFiles: true }))
-
-app.use(cors())
+const corsOptions = {
+    origin: '*'
+};
+app.use(cors(corsOptions));
 app.use(express.json())
 
 app.use('/user', userRoute)
