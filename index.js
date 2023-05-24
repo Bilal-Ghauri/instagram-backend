@@ -8,8 +8,12 @@ const fileupload = require('express-fileupload')
 const postRoute = require('./routers/Post/Post')
 const connectDB = require('./db/db')
 const port = process.env.PORT || 5050
+const bodyParser = require('body-parser')
 
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Headers", "*")
+})
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -19,7 +23,8 @@ cloudinary.config({
 
 app.use(fileupload({ useTempFiles: true }))
 app.use(cors());
-app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/user', userRoute)
 app.use('/post', postRoute)
