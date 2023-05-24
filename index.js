@@ -12,9 +12,11 @@ const port = process.env.PORT || 5050
 
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Headers", "*")
-})
-
+    req.connection.setNoDelay(true)
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
