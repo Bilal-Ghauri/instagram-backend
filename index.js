@@ -10,11 +10,6 @@ const connectDB = require('./db/db')
 const port = process.env.PORT || 5050
 
 
-
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Headers", "*")
-})
-
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
