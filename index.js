@@ -9,7 +9,11 @@ const postRoute = require('./routers/Post/Post')
 const connectDB = require('./db/db')
 const port = process.env.PORT || 5050
 
-
+const corsOptions = {
+    origin: 'https://instagram-frontend-omega.vercel.app',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200
+}
 
 // app.use(function (req, res, next) {
 //     req.connection.setNoDelay(true)
@@ -24,7 +28,7 @@ cloudinary.config({
 })
 
 app.use(fileupload({ useTempFiles: true }))
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json())
 
 app.use('/user', userRoute)
