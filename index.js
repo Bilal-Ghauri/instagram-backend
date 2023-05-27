@@ -10,14 +10,14 @@ const connectDB = require('./db/db')
 const port = process.env.PORT || 5050
 
 const corsOptions = {
-    origin: 'https://instagram-frontend-omega.vercel.app',
+    origin: '*',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://instagram-frontend-omega.vercel.app/');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
