@@ -5,9 +5,11 @@ const PostModel = require("../../models/Post/PostModel");
 const UserModel = require("../../models/Users/UserModel")
 const CommentModel = require('../../models/Post/Comment')
 const UserMiddleware = require("../../middlewares/UserMiddleware");
+const fs = require("fs")
 
 router.post("/post-image-upload", UserMiddleware, async (req, res) => {
   try {
+    console.log(req.files)
     const result = await cloudinary.uploader.upload(
       req.files["image"].tempFilePath,
       {
@@ -15,9 +17,8 @@ router.post("/post-image-upload", UserMiddleware, async (req, res) => {
         folder: "hellogram",
       }
     );
-    if (result) {
-      return res.status(200).json({ url: result.secure_url });
-    }
+    fs.unlinkSync(req.files["image"].tempFilePath)
+    return res.status(200).json({ url: result.secure_url });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
